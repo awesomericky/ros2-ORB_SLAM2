@@ -1,3 +1,8 @@
+```
+ros2 run ros2_orbslam rgbd ../etc/ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml
+ros2 topic echo /orb_pose
+```
+
 # ros2-ORB_SLAM2
 ROS2 node wrapping the ORB_SLAM2 library
 
