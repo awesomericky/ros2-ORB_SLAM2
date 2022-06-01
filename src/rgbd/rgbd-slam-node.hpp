@@ -14,8 +14,17 @@
 #include "message_filters/synchronizer.h"
 #include "message_filters/sync_policies/approximate_time.h"
 
+#include <geometry_msgs/msg/pose_stamped.hpp>
+#include <geometry_msgs/msg/point.hpp>
+#include <geometry_msgs/msg/quaternion.hpp>
+#include <geometry_msgs/msg/transform_stamped.h>
+#include <tf2/LinearMath/Transform.h>
+#include <tf2_ros/transform_broadcaster.h>
+#include <tf2_geometry_msgs/tf2_geometry_msgs.h>
+
 #include <cv_bridge/cv_bridge.h>
 
+#include"Converter.h"
 #include"System.h"
 #include"Frame.h"
 #include "Map.h"
@@ -43,6 +52,11 @@ private:
     std::shared_ptr<message_filters::Subscriber<sensor_msgs::msg::Image> > depth_sub;
 
     std::shared_ptr<message_filters::Synchronizer<approximate_sync_policy> > syncApproximate;
+
+    std::shared_ptr<rclcpp::Publisher<geometry_msgs::msg::PoseStamped>> pose_pub;
+    std::shared_ptr<tf2_ros::TransformBroadcaster> br_;
+    bool pub_tf = true;
+    bool pub_pose = true;
 };
 
 #endif

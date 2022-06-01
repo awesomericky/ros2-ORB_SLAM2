@@ -17,6 +17,10 @@ find_package(rclcpp REQUIRED)
 find_package(sensor_msgs REQUIRED)
 find_package(cv_bridge REQUIRED)
 find_package(message_filters REQUIRED)
+#find_package(geometry_msgs REQUIRED)
+find_package(tf2 REQUIRED)
+find_package(tf2_ros REQUIRED)
+find_package(tf2_geometry_msgs REQUIRED)
 find_package(Pangolin REQUIRED)
 find_package(ORB_SLAM2 REQUIRED)
 
@@ -30,7 +34,7 @@ add_executable(rgbd
   src/rgbd/rgbd.cpp
   src/rgbd/rgbd-slam-node.cpp
 )
-ament_target_dependencies(rgbd rclcpp sensor_msgs cv_bridge message_filters ORB_SLAM2 Pangolin)
+ament_target_dependencies(rgbd rclcpp sensor_msgs cv_bridge message_filters tf2 tf2_ros tf2_geometry_msgs ORB_SLAM2 Pangolin)
 
 add_executable(stereo 
   src/stereo/stereo.cpp

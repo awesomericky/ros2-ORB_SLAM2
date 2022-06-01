@@ -74,7 +74,7 @@ void RgbdSlamNode::GrabRGBD(const ImageMsg::SharedPtr msgRGB, const ImageMsg::Sh
       geometry_msgs::msg::TransformStamped transformStamped;
       transformStamped.header.stamp = msgRGB->header.stamp;
       transformStamped.header.frame_id = "world";
-      transformStamped.child_frame_id = "base";
+      transformStamped.child_frame_id = "map";
       transformStamped.transform.translation.x = t_.at<float>(0, 0)*scale_factor;
       transformStamped.transform.translation.y = t_.at<float>(0, 1)*scale_factor;
       transformStamped.transform.translation.z = t_.at<float>(0, 2)*scale_factor;
@@ -86,7 +86,7 @@ void RgbdSlamNode::GrabRGBD(const ImageMsg::SharedPtr msgRGB, const ImageMsg::Sh
     {
       geometry_msgs::msg::PoseStamped pose;
       pose.header.stamp = msgRGB->header.stamp;
-      pose.header.frame_id ="base";
+      pose.header.frame_id ="map";
       pose.pose.position.x = t_.at<float>(0, 0)*scale_factor;
       pose.pose.position.y = t_.at<float>(0, 1)*scale_factor;
       pose.pose.position.z = t_.at<float>(0, 2)*scale_factor;
