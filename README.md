@@ -1,8 +1,86 @@
+### Install OpenCV 3.x [link](https://www.notion.so/opencv-3-x-364951de38eb47d0a57cdba7996600a0)
+Change cmake as following (unable GPU usage)
+```
+# Check installed opencv ('not found' should appear)
+pkg-config --modversion opencv
+
+# Download opencv
+mkdir opencv
+cd opencv
+wget -O opencv-3.4.11.zip https://github.com/opencv/opencv/archive/3.4.11.zip
+wget -O opencv_contrib-3.4.11.zip https://github.com/opencv/opencv_contrib/archive/3.4.11.zip
+unzip opencv-3.4.11.zip
+unzip opencv_contrib-3.4.11.zip
+
+cd opencv-3.4.11/
+mkdir build
+cd build
+
+# Cmake (unable GPU usage)
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D WITH_TBB=OFF \
+-D WITH_IPP=OFF \
+-D WITH_1394=OFF \
+-D BUILD_WITH_DEBUG_INFO=OFF \
+-D BUILD_DOCS=OFF \
+-D INSTALL_C_EXAMPLES=ON \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D BUILD_EXAMPLES=OFF \
+-D BUILD_TESTS=OFF \
+-D BUILD_PERF_TESTS=OFF \
+-D WITH_QT=ON \
+-D WITH_CUDA=OFF \
+-D BUILD_opencv_gpu=OFF \
+-D WITH_OPENGL=ON \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.11/modules \
+-D WITH_V4L=ON \
+-D WITH_FFMPEG=ON \
+-D WITH_XINE=ON \
+-D WITH_NVCUVID=OFF \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D OPENCV_GENERATE_PKGCONFIG=ON ../
+
+# Cmake (enable GPU usage)
+cmake -D CMAKE_BUILD_TYPE=RELEASE \
+-D CMAKE_INSTALL_PREFIX=/usr/local \
+-D WITH_TBB=OFF \
+-D WITH_IPP=OFF \
+-D WITH_1394=OFF \
+-D BUILD_WITH_DEBUG_INFO=OFF \
+-D BUILD_DOCS=OFF \
+-D INSTALL_C_EXAMPLES=ON \
+-D INSTALL_PYTHON_EXAMPLES=ON \
+-D BUILD_EXAMPLES=OFF \
+-D BUILD_TESTS=OFF \
+-D BUILD_PERF_TESTS=OFF \
+-D WITH_QT=ON \
+-D WITH_CUDA=ON \
+-D WITH_OPENGL=ON \
+-D OPENCV_EXTRA_MODULES_PATH=../../opencv_contrib-3.4.11/modules \
+-D WITH_V4L=ON \
+-D WITH_FFMPEG=ON \
+-D WITH_XINE=ON \
+-D WITH_NVCUVID=OFF \
+-D BUILD_NEW_PYTHON_SUPPORT=ON \
+-D OPENCV_GENERATE_PKGCONFIG=ON ../
+
+# Install
+time make -j $(nproc)
+sudo make install
+sudo sh -c 'echo '/usr/local/lib' > /etc/ld.so.conf.d/opencv.conf'
+sudo ldconfig
+
+# Check installed opencv ('3.4.11' should appear)
+pkg-config --modversion opencv
+```
+
 ```
 ros2 run ros2_orbslam rgbd ../etc/ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml
 ros2 topic echo /orb_pose
 ```
 
+////////////////////////////////////////////////////////////////////////////
 # ros2-ORB_SLAM2
 ROS2 node wrapping the ORB_SLAM2 library
 
