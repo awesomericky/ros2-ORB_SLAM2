@@ -102,9 +102,14 @@ rm -rf build
 ```
 #### Install ROS2 wrapper of ORB_slam2
 ```
-
+mkdir -p orb_slam_ws/src
+cd orb_slam_ws/src
+git clone git@github.com:awesomericky/ros2-ORB_SLAM2.git
+cd ..
+export ORB_SLAM2_ROOT_DIR=/path/to/ORB_SLAM2
+colcon build
 ```
-
+#### Run ORB_slam2
 ```
 ros2 run ros2_orbslam rgbd ../etc/ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml
 ros2 topic echo /orb_pose
