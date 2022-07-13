@@ -1,5 +1,9 @@
-### Install OpenCV 3.x [link](https://www.notion.so/opencv-3-x-364951de38eb47d0a57cdba7996600a0)
-Change cmake as following (unable GPU usage)
+#### Make directory for cloning related packages
+```
+mkdir orb_slam_dependency
+cd orb_slam_dependency  # 'opencv' and 'pangolin' folder will be cloned here.
+```
+#### Install OpenCV 3.x [link](https://www.notion.so/opencv-3-x-364951de38eb47d0a57cdba7996600a0)
 ```
 # Check installed opencv ('not found' should appear)
 pkg-config --modversion opencv
@@ -73,6 +77,32 @@ sudo ldconfig
 
 # Check installed opencv ('3.4.11' should appear)
 pkg-config --modversion opencv
+```
+#### Install Pangolin
+```
+sudo git clone https://github.com/stevenlovegrove/Pangolin pangolin
+cd pangolin
+mkdir build
+cd build
+cmake ..
+make
+sudo make install
+```
+#### Install ORB_slam2 (some installation errors are fixed from the [original repository](https://github.com/raulmur/ORB_SLAM2))
+```
+git clone git@github.com:awesomericky/ORB_SLAM2.git
+cd ORB_SLAM2
+chmod +x build.sh
+./build.sh
+
+# If 'opencv Qt..' error occurs .. export the path and rebuild it.
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
+rm -rf build
+./build.sh
+```
+#### Install ROS2 wrapper of ORB_slam2
+```
+
 ```
 
 ```
