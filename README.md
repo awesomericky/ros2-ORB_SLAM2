@@ -1,9 +1,11 @@
+# Install and Run ORB_SLAM2 in ROS2
+
 #### Make directory for cloning related packages
 ```
 mkdir orb_slam_dependency
 cd orb_slam_dependency  # 'opencv' and 'pangolin' folder will be cloned here.
 ```
-#### Install OpenCV 3.x [link](https://www.notion.so/opencv-3-x-364951de38eb47d0a57cdba7996600a0)
+#### Install OpenCV 3.x [[installation reference](https://www.notion.so/opencv-3-x-364951de38eb47d0a57cdba7996600a0)]
 ```
 # Check installed opencv ('not found' should appear)
 pkg-config --modversion opencv
@@ -88,7 +90,7 @@ cmake ..
 make
 sudo make install
 ```
-#### Install ORB_slam2 (some installation errors are fixed from the [original repository](https://github.com/raulmur/ORB_SLAM2))
+#### Install ORB_slam2 (some installation errors are fixed from the [original repo](https://github.com/raulmur/ORB_SLAM2)) [[modified repo](https://github.com/awesomericky/ORB_SLAM2)] [[installation reference](https://www.notion.so/ORB-SLAM2-09ad4624eccb4478b23a9be8341348bc)]
 ```
 git clone git@github.com:awesomericky/ORB_SLAM2.git
 cd ORB_SLAM2
@@ -100,7 +102,8 @@ export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
 rm -rf build
 ./build.sh
 ```
-#### Install ROS2 wrapper of ORB_slam2
+
+#### Install ROS2 wrapper of ORB_slam2 [[repo](https://github.com/awesomericky/ros2-ORB_SLAM2)]
 ```
 mkdir -p orb_slam_ws/src
 cd orb_slam_ws/src
@@ -122,8 +125,16 @@ ros2 run ros2_orbslam mono ../ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2
 ros2 run ros2_orbslam rgbd ../ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml  # rgbd slam
 ros2 topic echo /orb_pose  # view estimated pose
 ```
+#### Install and run sensors [[repo](https://github.com/awesomericky/raibo-smd_ros)]
+```
+source /opt/ros/foxy/setup.zsh
+source ../realsense_ws/install/local_setup.zsh  (realsense-ros from source)
+source install/local_setup.zsh  (main workspace with sensor streaming)
+export LD_LIBRARY_PATH=/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH  (need in local desktop to make rviz2 available)
+ros2 launch raibo-smd_ros head_launch.py
+```
+----------------------------------------------------------------------------------------------
 
-////////////////////////////////////////////////////////////////////////////
 # ros2-ORB_SLAM2
 ROS2 node wrapping the ORB_SLAM2 library
 
