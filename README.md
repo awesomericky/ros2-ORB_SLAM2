@@ -111,8 +111,16 @@ colcon build
 ```
 #### Run ORB_slam2
 ```
-ros2 run ros2_orbslam rgbd ../etc/ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml
-ros2 topic echo /orb_pose
+# source 
+source install/setup.zsh
+
+# export ORB_SLAM2 library and its dependencies 
+export LD_LIBRARY_PATH=/home/awesomericky/ROS_workspace/orb_slam_dependancy/pangolin/build:/home/awesomericky/ROS_workspace/ORB_SLAM2/Thirdparty/DBoW2/lib:/home/awesomericky/ROS_workspace/ORB_SLAM2/Thirdparty/g2o/lib:/home/awesomericky/ROS_workspace/ORB_SLAM2/lib:/usr/lib/x86_64-linux-gnu/:$LD_LIBRARY_PATH
+
+# run orb2_slam
+ros2 run ros2_orbslam mono ../ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml  # mono slam
+ros2 run ros2_orbslam rgbd ../ORB_SLAM2/Vocabulary/ORBvoc.txt src/ros2-ORB_SLAM2/src/rgbd/d435i.yaml  # rgbd slam
+ros2 topic echo /orb_pose  # view estimated pose
 ```
 
 ////////////////////////////////////////////////////////////////////////////
