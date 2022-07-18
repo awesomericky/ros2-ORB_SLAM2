@@ -48,3 +48,4 @@ id_rsa
 wandb/
 __pycache__/
 *.DS_Store
+cmake-build-debug/

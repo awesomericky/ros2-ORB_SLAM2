@@ -60,13 +60,13 @@ void RgbdSlamNode::GrabRGBD(const ImageMsg::SharedPtr msgRGB, const ImageMsg::Sh
     tf2::Transform transform;
     float scale_factor=1.0;
     vector<float> q;
-  if (pub_tf || pub_pose) {
-      R_ = Tcw.rowRange(0,3).colRange(0,3).t();
-      t_ = -R_*Tcw.rowRange(0,3).col(3);
-      q = ORB_SLAM2::Converter::toQuaternion(R_);
-      transform.setOrigin(tf2::Vector3(t_.at<float>(0, 0)*scale_factor, t_.at<float>(0, 1)*scale_factor, t_.at<float>(0, 2)*scale_factor));
-      tf2::Quaternion tf_quaternion(q[0], q[1], q[2], q[3]);
-      transform.setRotation(tf_quaternion);
+    if (pub_tf || pub_pose) {
+        R_ = Tcw.rowRange(0,3).colRange(0,3).t();
+        t_ = -R_*Tcw.rowRange(0,3).col(3);
+        q = ORB_SLAM2::Converter::toQuaternion(R_);
+        transform.setOrigin(tf2::Vector3(t_.at<float>(0, 0)*scale_factor, t_.at<float>(0, 1)*scale_factor, t_.at<float>(0, 2)*scale_factor));
+        tf2::Quaternion tf_quaternion(q[0], q[1], q[2], q[3]);
+        transform.setRotation(tf_quaternion);
     }
 
     if (pub_tf)

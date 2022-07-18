@@ -28,7 +28,7 @@ add_executable(mono
   src/monocular/mono.cpp
   src/monocular/monocular-slam-node.cpp
 )
-ament_target_dependencies(mono rclcpp sensor_msgs cv_bridge ORB_SLAM2 Pangolin)
+ament_target_dependencies(mono rclcpp sensor_msgs cv_bridge tf2 tf2_ros tf2_geometry_msgs ORB_SLAM2 Pangolin)
 
 add_executable(rgbd 
   src/rgbd/rgbd.cpp
